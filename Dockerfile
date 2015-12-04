@@ -41,10 +41,15 @@ RUN yum -y install \
 # Install Grunt and Bower
 RUN npm install -g \
   grunt-cli \
-  bower
+  bower && \
+  echo '{ "allow_root": true }' > /root/.bowerrc
 
 # Clean up
 RUN yum clean all && \
   npm cache clean -f
 
-ENTRYPOINT ["bash"]
+# Define working directory.
+WORKDIR /data
+
+# Define default command
+CMD ["bash"]
