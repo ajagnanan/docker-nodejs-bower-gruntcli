@@ -41,8 +41,7 @@ RUN yum -y install \
 # Install Grunt and Bower
 RUN npm install -g \
   grunt-cli \
-  bower \
-  serverless && \
+  bower && \
   echo '{ "allow_root": true }' > /root/.bowerrc
 
 # Clean up
