@@ -23,7 +23,7 @@ RUN yum -y install \
   nodejs \
   npm && \
   npm install -g n && \
-  n lts && \
+  n 4.3.2 && \
   npm install -g npm
 
 # Install ruby
@@ -43,6 +43,9 @@ RUN npm install -g \
   grunt-cli \
   bower && \
   echo '{ "allow_root": true }' > /root/.bowerrc
+  
+# Install serverless 
+RUN npm install -g serverless@1.3.0
 
 # Clean up
 RUN yum clean all && \
