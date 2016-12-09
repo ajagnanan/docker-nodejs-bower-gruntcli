@@ -1,7 +1,8 @@
 # Use the base CentOS image.  If systemd is required in the future, change to 'creativeux/centos-base-systemd'
 FROM centos:7
 
-MAINTAINER Adrian Jagnanan 
+MAINTAINER Adrian Jagnanan
+USER root
 
 # Install the EPEL repository
 RUN yum -y install \
@@ -24,7 +25,8 @@ RUN yum -y install \
   nodejs \
   npm && \
   npm install -g n && \
-  n 4.3.2
+  n 4.3.2 && \
+  npm install -g npm@latest-2
 
 # Install ruby
 RUN yum -y install ruby \
@@ -38,19 +40,20 @@ RUN gem install compass
 RUN yum -y install \
   libpng-devel
 
-# Downgrade npm
-RUN cd /usr/local/lib/node_modules && \
-  curl registry.npmjs.com/npm/-/npm-2.12.0.tgz |tar xz --transform="s:^package:npm:" && \
-  sudo npm i npm -g
-
 # Install Grunt and Bower
 RUN npm install -g \
   grunt-cli \
   bower && \
   echo '{ "allow_root": true }' > /root/.bowerrc
-  
-# Install serverless 
+
+# Install serverless
 RUN npm install -g serverless@1.3.0
+
+# Print out versions
+RUN node -v && \
+  npm -v && \
+  bower -v && \
+  sls -v
 
 # Clean up
 RUN yum clean all && \
