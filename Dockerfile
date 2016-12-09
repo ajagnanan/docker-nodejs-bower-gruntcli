@@ -16,15 +16,15 @@ RUN yum -y install \
 RUN yum -y install \
   make \
   gcc \
-  git
+  git \
+  sudo
 
 # Install node & npm and upgrade to desired versions.
 RUN yum -y install \
   nodejs \
   npm && \
   npm install -g n && \
-  n 4.3.2 && \
-  npm install -g npm
+  n 4.3.2
 
 # Install ruby
 RUN yum -y install ruby \
@@ -37,6 +37,11 @@ RUN gem install compass
 # Install required libs
 RUN yum -y install \
   libpng-devel
+
+# Downgrade npm
+RUN cd /usr/local/lib/node_modules && \
+  curl registry.npmjs.com/npm/-/npm-2.12.0.tgz |tar xz --transform="s:^package:npm:" && \
+  npm i npm -g
 
 # Install Grunt and Bower
 RUN npm install -g \
