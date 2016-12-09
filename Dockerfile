@@ -49,6 +49,11 @@ RUN npm install -g \
 # Install serverless
 RUN npm install -g serverless@1.3.0
 
+# Install aws-sdk
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+  python get-pip.py && \
+  pip install awscli
+
 # Print out versions
 RUN node -v && \
   npm -v && \
