@@ -41,7 +41,7 @@ RUN yum -y install \
 # Downgrade npm
 RUN cd /usr/local/lib/node_modules && \
   curl registry.npmjs.com/npm/-/npm-2.12.0.tgz |tar xz --transform="s:^package:npm:" && \
-  npm i npm -g
+  sudo npm i npm -g
 
 # Install Grunt and Bower
 RUN npm install -g \
