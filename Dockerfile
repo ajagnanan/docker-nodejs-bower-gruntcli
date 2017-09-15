@@ -25,8 +25,7 @@ RUN yum -y install \
   nodejs \
   npm && \
   npm install -g n && \
-  n 4.3.2 && \
-  npm install -g npm@latest-2
+  n 6.10
 
 # Install ruby
 RUN yum -y install ruby \
@@ -47,7 +46,7 @@ RUN npm install -g \
   echo '{ "allow_root": true }' > /root/.bowerrc
 
 # Install serverless
-RUN npm install -g serverless@1.3.0
+RUN npm install -g serverless@1.20.0
 
 # Install aws-sdk
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
